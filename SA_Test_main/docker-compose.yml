@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  backend_main:
+    build: .
+    ports:
+      - "8000:8000"
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.5
+
+  backend_ase64:
+    build: ../SA_Test_base64
+    ports:
+      - "8001:8001"
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.6
+
+networks:
+  vpcbr:
+    driver: bridge
+    ipam:
+     config:
+        - subnet: 10.5.0.0/16
+          gateway: 10.5.0.1
